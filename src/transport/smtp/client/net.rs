@@ -199,7 +199,7 @@ impl NetworkStream {
                 let stream = connector
                     .configure()
                     .map_err(error::connection)?
-                    .verify_hostname(*accept_invalid_hostnames)
+                    .verify_hostname(!*accept_invalid_hostnames)
                     .connect(tls_parameters.domain(), tcp_stream)
                     .map_err(error::connection)?;
                 InnerNetworkStream::BoringTls(stream)

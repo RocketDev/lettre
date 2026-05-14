@@ -374,7 +374,7 @@ impl AsyncNetworkStream {
                 #[cfg(feature = "tokio1-boring-tls")]
                 return {
                     let mut config = connector.configure().map_err(error::connection)?;
-                    config.set_verify_hostname(accept_invalid_hostnames);
+                    config.set_verify_hostname(!accept_invalid_hostnames);
 
                     let stream = tokio1_boring::connect(config, &domain, tcp_stream)
                         .await
